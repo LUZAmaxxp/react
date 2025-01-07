@@ -56,7 +56,6 @@ function Navbar() {
             <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-yellow-400 transition-all duration-500 ease-in-out group-hover:w-full"></span>
           </li>
 
-          {/* Conditionally render Admin Page link */}
           {isAdmin && (
             <li className="group relative">
               <Link
@@ -110,7 +109,6 @@ function Navbar() {
             <Link to="/AboutUs">About Us</Link>
           </li>
 
-          {/* Conditionally render Admin Page link in mobile menu */}
           {isAdmin && (
             <li className="px-6 py-2 hover:bg-yellow-400 transition-colors">
               <Link to="/adminpage">AdminPage</Link>

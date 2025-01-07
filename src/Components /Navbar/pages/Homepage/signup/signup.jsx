@@ -13,7 +13,6 @@ import { motion } from "framer-motion";
 import Img from "../../../../../assets/img/main.jpg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"; // Axios to make API calls
-import user from "../../../../../Backend/models/user";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -47,10 +46,10 @@ export default function SignUp() {
         );
 
         console.log("Registration response:", registerRes.data);
-        localStorage.setItem("userRole", registerRes.data.role);
 
         // Redirect based on the role received from backend
         if (registerRes.data.role === "admin") {
+          localStorage.setItem("token", registerRes.data.token);
           navigate("/adminpage");
         } else {
           navigate("/Productspage");

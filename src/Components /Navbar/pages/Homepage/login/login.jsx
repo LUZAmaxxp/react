@@ -16,7 +16,6 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axios from "axios";
 import { auth, provider } from "../../../../../firebase"; // Import Firebase
 import { signInWithPopup } from "firebase/auth";
-import Img from "../../../../../assets/img/main.jpg";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -102,11 +101,8 @@ export default function Login() {
       justifyContent="center"
       minHeight="100vh"
       sx={{
-        backgroundImage: `url(${Img})`,
         backgroundSize: "cover",
-        backgroundPosition: "center bottom",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
+        backgroundPosition: "center",
         px: 2,
       }}
     >

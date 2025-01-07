@@ -10,6 +10,7 @@ function AdminPage() {
   const [imageFile, setImageFile] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
+  const [setMessage] = useState("");
 
   useEffect(() => {
     fetchProducts();
@@ -28,6 +29,7 @@ function AdminPage() {
   const fetchUsers = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/users");
+      console.log("Fetched users:", response.data); // Log the fetched users
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -121,10 +123,9 @@ function AdminPage() {
 
   const handlePromoteUser = async (id, newRole) => {
     try {
-      const response = await axios.put(
-        `http://localhost:5000/api/auth/promote-user/${id}`,
-        { role: newRole }
-      );
+      await axios.put(`http://localhost:5000/api/auth/promote-user/${id}`, {
+        role: newRole,
+      });
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user._id === id ? { ...user, role: newRole } : user
@@ -206,9 +207,9 @@ function AdminPage() {
               <tbody>
                 {users.map((user) => (
                   <tr key={user._id}>
-                    <td className="py-2 px-4">{user.username}</td>
+                    <td className="py-2 px-4">{user.username || "N/A"}</td>
                     <td className="py-2 px-4">{user.email}</td>
-                    <td className="py-2 px-4">{user.role}</td>
+                    <td className="py-2 px-4">{user.role || "client"}</td>
                     <td className="py-2 px-4">
                       {user.role !== "admin" && (
                         <button
@@ -233,7 +234,6 @@ function AdminPage() {
             </table>
           </div>
 
-          {/* Product Add/Edit Form */}
           {(isAdding || editingProduct) && (
             <div className="bg-white p-8 rounded-lg shadow-lg mt-12">
               <h3 className="text-2xl font-bold mb-6">

@@ -9,12 +9,12 @@ export const useUserContext = () => useContext(UserContext);
 // Provider component to manage the user state
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState();
 
   // Check if the user's emkkail ends with '@e-polytechnique.ma'
   useEffect(() => {
     if (user && user.email.endsWith("@e-polytechnique.ma")) {
-      setIsAdmin(!isAdmin);
+      setIsAdmin(true);
     } else {
       setIsAdmin(false);
     }

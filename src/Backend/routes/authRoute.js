@@ -40,6 +40,7 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 router.post("/check-email", async (req, res) => {
   const { email } = req.body;
   try {
@@ -51,22 +52,6 @@ router.post("/check-email", async (req, res) => {
   } catch (err) {
     console.error("Error checking email:", err);
     return res.status(500).json({ message: "Error checking email" });
-  }
-});
-// Promote user endpoint
-router.put("/promote-user/:userId", async (req, res) => {
-  const { role } = req.body; // expecting "admin" or "client"
-  try {
-    const user = await User.findByIdAndUpdate(
-      req.params.userId,
-      { role },
-      { new: true }
-    );
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.status(200).json({ message: `User role updated to ${role}`, user });
-  } catch (error) {
-    console.error("Error updating user role:", error);
-    res.status(500).json({ message: "Error updating user role" });
   }
 });
 
