@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-// Create context for user data
 const UserContext = createContext();
 
 // Custom hook to access the user context
